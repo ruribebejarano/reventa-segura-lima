@@ -54,6 +54,16 @@ src/
   utils/          formato de soles y fechas
 ```
 
+## Publicar en la web (Vercel)
+
+```bash
+npm run build:web     # genera dist/ (npx expo export -p web)
+npm run preview:web   # sirve dist/ en http://localhost:3000 como SPA
+npm run imagenes      # regenera favicon e imagen de vista previa (public/og.png)
+```
+
+`vercel.json` ya define el build (`npx expo export -p web`), la carpeta `dist` y redirige todas las rutas a `index.html`, así que los links directos como `/evento/e1` o `/?prueba=1` funcionan. Los metadatos de la vista previa en WhatsApp están en `public/index.html`; si el dominio de Vercel no es `reventa-segura-lima.vercel.app`, actualiza ahí las URLs de `og:url` y `og:image`.
+
 ## Verificación
 
 ```bash

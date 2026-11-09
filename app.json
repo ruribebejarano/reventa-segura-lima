@@ -20,8 +20,15 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
+      "bundler": "metro",
       "output": "single",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.png",
+      "name": "Reventa Verificada",
+      "shortName": "Reventa Verificada",
+      "lang": "es-PE",
+      "themeColor": "#2A9D8F",
+      "backgroundColor": "#E9EEF3",
+      "description": "Compra entradas de reventa verificadas, con tu dinero protegido hasta que ingreses."
     },
     "plugins": [
       "expo-router",
@@ -38,6 +45,7 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "primaryColor": "#2A9D8F"
   }
 }
