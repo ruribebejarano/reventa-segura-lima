@@ -24,6 +24,8 @@ export const colors = {
   primaryText: '#1D7468',
   successText: '#237A46',
   accentText: '#A8432A',
+  /** Fondo del botón principal: naranja más oscuro para que el texto blanco cumpla AA (4,75:1). */
+  accentStrong: '#C24E2F',
   /** Fondo exterior en web (alrededor del "celular"). */
   webOuter: '#E9EEF3',
 } as const;

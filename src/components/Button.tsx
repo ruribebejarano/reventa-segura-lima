@@ -20,7 +20,7 @@ export type ButtonProps = {
 };
 
 const palette: Record<ButtonVariant, { bg: string; bgPressed: string; fg: string; border?: string }> = {
-  primary: { bg: colors.accent, bgPressed: '#D45F42', fg: colors.white },
+  primary: { bg: colors.accentStrong, bgPressed: colors.accentText, fg: colors.white },
   secondary: { bg: colors.surface, bgPressed: colors.primarySoft, fg: colors.primaryText, border: colors.primary },
   ghost: { bg: 'transparent', bgPressed: colors.primarySoft, fg: colors.primaryText },
 };

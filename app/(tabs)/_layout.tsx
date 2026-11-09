@@ -22,6 +22,8 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
+        // En Android la barra subía sobre el teclado y tapaba el formulario de Vender.
+        tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: colors.primaryText,
         tabBarInactiveTintColor: colors.textSecondary,
         tabBarLabelStyle: { fontFamily: fonts.medium, fontSize: 12, lineHeight: 16 },
@@ -34,10 +36,10 @@ export default function TabsLayout() {
         },
         sceneStyle: { backgroundColor: colors.bg },
       }}>
-      <Tabs.Screen name="index" options={{ title: 'Inicio', tabBarIcon: icono('home-outline') }} />
-      <Tabs.Screen name="entradas" options={{ title: 'Mis entradas', tabBarIcon: icono('ticket-outline') }} />
-      <Tabs.Screen name="vender" options={{ title: 'Vender', tabBarIcon: icono('pricetag-outline') }} />
-      <Tabs.Screen name="perfil" options={{ title: 'Perfil', tabBarIcon: icono('person-outline') }} />
+      <Tabs.Screen name="index" options={{ title: 'Inicio', tabBarAccessibilityLabel: 'Inicio', tabBarIcon: icono('home-outline') }} />
+      <Tabs.Screen name="entradas" options={{ title: 'Mis entradas', tabBarAccessibilityLabel: 'Mis entradas', tabBarIcon: icono('ticket-outline') }} />
+      <Tabs.Screen name="vender" options={{ title: 'Vender', tabBarAccessibilityLabel: 'Vender', tabBarIcon: icono('pricetag-outline') }} />
+      <Tabs.Screen name="perfil" options={{ title: 'Perfil', tabBarAccessibilityLabel: 'Perfil', tabBarIcon: icono('person-outline') }} />
     </Tabs>
   );
 }
