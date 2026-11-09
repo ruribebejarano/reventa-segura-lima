@@ -99,6 +99,8 @@ export default function RootLayout() {
             <Stack.Screen name="confirmacion/[orderId]" options={{ gestureEnabled: false }} />
             <Stack.Screen name="entrada/[orderId]" />
             <Stack.Screen name="reporte/[orderId]" />
+            <Stack.Screen name="ayuda" />
+            <Stack.Screen name="metodos-pago" />
             <Stack.Screen name="componentes" />
           </Stack.Protected>
           <Stack.Protected guard={!conSesion}>

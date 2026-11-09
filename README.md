@@ -27,6 +27,8 @@ Usuario demo: botón **"Entrar como Ana (demo)"** en el login.
 
 Abre la app con `?prueba=1` (por ejemplo `http://localhost:8081/?prueba=1`). Activa el modo prueba, entra como Ana y abre directamente el primer evento. En este modo se registran las vistas y acciones y se pregunta la confianza del usuario (1 a 5) antes y después de la verificación.
 
+En **Perfil → Sesión de prueba** está el resumen automático (¿tocó "Verificar" antes de pagar?, ¿pagó?, confianza antes → después, tiempo total y por pantalla). **Copiar resultados** lo copia como texto plano para pegarlo en el Experiment Board y **Nueva sesión** reinicia los datos para el siguiente participante.
+
 Casos de demo:
 
 - La oferta de **Sofía L. (Campo A, S/ 180)** de la Gira Aurora 2026 falla la verificación.
