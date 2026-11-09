@@ -1,56 +1,59 @@
-# Welcome to your Expo app 👋
+# Reventa Verificada
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Prototipo (MVP) de una app de **reventa segura de entradas para conciertos en Lima**.
 
-## Get started
+- Verifica cada entrada con la ticketera oficial **antes de pagar**.
+- La reemite **a nombre y DNI del comprador** con un QR nuevo (el QR del vendedor se anula).
+- **Retiene el pago** hasta que el fan ingresa al evento. Si no entra, se le devuelve el 100 %.
+- El precio de reventa nunca supera el **tope de 1,5 × el precio original**.
 
-1. Install dependencies
+> Es un prototipo para demo y pruebas con usuarios: **todo es simulado**, sin backend ni pagos reales.
 
-   ```bash
-   npm install
-   ```
+## Stack
 
-2. Start the app
+Expo (SDK 58) · Expo Router · TypeScript · Zustand + AsyncStorage · react-native-qrcode-svg · Inter
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Cómo ejecutarlo
 
 ```bash
-npm run reset-project
+npm install
+npx expo start          # escanea el QR con Expo Go (Android)
+npx expo start --web    # versión web, enmarcada como celular
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+Usuario demo: botón **"Entrar como Ana (demo)"** en el login.
 
-### Other setup steps
+### Modo prueba (pruebas con usuarios)
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Abre la app con `?prueba=1` (por ejemplo `http://localhost:8081/?prueba=1`). Activa el modo prueba, entra como Ana y abre directamente el primer evento. En este modo se registran las vistas y acciones y se pregunta la confianza del usuario (1 a 5) antes y después de la verificación.
 
-## Learn more
+Casos de demo:
 
-To learn more about developing your project with Expo, look at the following resources:
+- La oferta de **Sofía L. (Campo A, S/ 180)** de la Gira Aurora 2026 falla la verificación.
+- Al vender, un código que empiece con **`USED`** falla la verificación.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Estructura
 
-## Join the community
+```
+app/              rutas (Expo Router)
+  (tabs)/         Inicio, Mis entradas, Vender, Perfil
+  evento/[id]     ofertas de un evento con tope de precio
+  oferta/[id]     detalle de la oferta
+  verificacion/   verificación simulada con la ticketera
+  pago/           pago con garantía (ficticio)
+  confirmacion/   entrada emitida con QR
+  entrada/        detalle de la entrada y línea de tiempo de la garantía
+  reporte/        reporte de problema de ingreso y reembolso
+src/
+  theme.ts        tokens de diseño
+  components/     componentes reutilizables
+  data/           tipos, reglas de negocio y datos semilla
+  store/          estado global (Zustand) y selectores
+  utils/          formato de soles y fechas
+```
 
-Join our community of developers creating universal apps.
+## Verificación
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npx tsc --noEmit
+```
