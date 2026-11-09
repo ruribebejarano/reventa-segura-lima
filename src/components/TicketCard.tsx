@@ -47,7 +47,7 @@ export function TicketCard({ evento, orden, qrSize = 200, sello }: TicketCardPro
             <QRCode value={orden.qr} size={qrSize} color={colors.navyDeep} backgroundColor={colors.surface} />
           </View>
           {sello ? (
-            <View style={styles.selloWrap} pointerEvents="none">
+            <View style={styles.selloWrap}>
               <View style={styles.sello}>
                 <AppText variant="h2" weight="bold" color={colors.danger}>
                   {sello.toUpperCase()}
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
   qr: { padding: spacing.sm, backgroundColor: colors.surface },
   qrAtenuado: { opacity: 0.2 },
   selloWrap: {
+    pointerEvents: 'none',
     position: 'absolute',
     top: 0,
     right: 0,

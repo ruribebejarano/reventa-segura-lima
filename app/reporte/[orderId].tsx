@@ -26,7 +26,7 @@ export default function Reporte() {
   }, [registrarEvento]);
 
   const irAEntradas = () => {
-    router.dismissAll();
+    if (router.canDismiss()) router.dismissAll();
     router.navigate('/entradas' as Href);
   };
   const volver = () => (router.canGoBack() ? router.back() : irAEntradas());

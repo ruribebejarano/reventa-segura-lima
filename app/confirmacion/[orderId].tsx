@@ -10,7 +10,7 @@ import { colors, spacing } from '@/theme';
 
 /** Vuelve a las pestañas (cerrando la confirmación) y abre la indicada. */
 function irA(ruta: Href) {
-  router.dismissAll();
+  if (router.canDismiss()) router.dismissAll();
   router.navigate(ruta);
 }
 

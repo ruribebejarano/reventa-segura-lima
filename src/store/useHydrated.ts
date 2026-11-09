@@ -1,16 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 
 import { useAppStore } from './useAppStore';
 
+const suscribir = (aviso: () => void) => useAppStore.persist.onFinishHydration(aviso);
+const hidratado = () => useAppStore.persist.hasHydrated();
+
 /** true cuando el store ya leyó lo guardado en AsyncStorage (evita redirigir a /login antes de tiempo). */
 export function useHydrated(): boolean {
-  const [hydrated, setHydrated] = useState(() => useAppStore.persist.hasHydrated());
-
-  useEffect(() => {
-    const unsub = useAppStore.persist.onFinishHydration(() => setHydrated(true));
-    setHydrated(useAppStore.persist.hasHydrated());
-    return unsub;
-  }, []);
-
-  return hydrated;
+  return useSyncExternalStore(suscribir, hidratado, hidratado);
 }

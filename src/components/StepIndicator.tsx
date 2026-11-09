@@ -25,13 +25,13 @@ export function StepIndicator({ pasos, actual }: StepIndicatorProps) {
           return (
             <Fragment key={p}>
               {i > 0 ? (
-                <View style={[styles.linea, { backgroundColor: i <= actual ? colors.primary : colors.border }]} />
+                <View style={[styles.linea, { backgroundColor: i <= actual ? colors.primaryText : colors.border }]} />
               ) : null}
               <View
                 style={[
                   styles.punto,
                   hecho && { backgroundColor: colors.success, borderColor: colors.success },
-                  esActual && { backgroundColor: colors.primary, borderColor: colors.primary },
+                  esActual && { backgroundColor: colors.primaryText, borderColor: colors.primaryText },
                 ]}>
                 {hecho ? (
                   <Ionicons name="checkmark" size={16} color={colors.white} />

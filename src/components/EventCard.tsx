@@ -36,7 +36,7 @@ export function EventCard({ evento, ofertas, onPress }: EventCardProps) {
       {ofertas > 0 ? (
         <View style={styles.verificables}>
           <Ionicons name="shield-checkmark" size={16} color={colors.success} />
-          <AppText variant="small" weight="semibold" color={colors.success}>
+          <AppText variant="small" weight="semibold" color={colors.successText}>
             {ofertas === 1 ? '1 entrada verificable' : `${ofertas} entradas verificables`}
           </AppText>
         </View>

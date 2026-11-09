@@ -8,9 +8,13 @@ import { colors, fonts } from '@/theme';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
-const icono =
-  (name: IconName) =>
-  ({ color, size }: { color: ColorValue; size: number }) => <Ionicons name={name} size={size} color={color as string} />;
+function icono(name: IconName) {
+  function TabIcon({ color, size }: { color: ColorValue; size: number }) {
+    return <Ionicons name={name} size={size} color={color as string} />;
+  }
+  TabIcon.displayName = `TabIcon(${name})`;
+  return TabIcon;
+}
 
 export default function TabsLayout() {
   const insets = useSafeAreaInsets();
@@ -18,7 +22,7 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: colors.primary,
+        tabBarActiveTintColor: colors.primaryText,
         tabBarInactiveTintColor: colors.textSecondary,
         tabBarLabelStyle: { fontFamily: fonts.medium, fontSize: 12, lineHeight: 16 },
         // Alto propio: con el alto por defecto (49) Inter 12 queda recortada debajo del ícono.

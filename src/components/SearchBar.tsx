@@ -28,7 +28,7 @@ export function SearchBar({ value, onChangeText, placeholder = 'Buscar' }: Searc
       {value.length > 0 ? (
         <Pressable
           onPress={() => onChangeText('')}
-          hitSlop={10}
+          hitSlop={12}
           accessibilityRole="button"
           accessibilityLabel="Borrar búsqueda">
           <Ionicons name="close-circle" size={20} color={colors.textSecondary} />

@@ -1,5 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useEffect, useRef, useState } from 'react';
+import { useFocusEffect } from 'expo-router';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, View, type ScrollViewInstance } from 'react-native';
 
 import {
@@ -58,9 +59,12 @@ export default function Vender() {
   const scrollRef = useRef<ScrollViewInstance>(null);
   const yPublicaciones = useRef(0);
 
-  useEffect(() => {
-    registrarEvento('vista', 'vender');
-  }, [registrarEvento]);
+  // Las pestañas quedan montadas: registramos la vista cada vez que se enfocan.
+  useFocusEffect(
+    useCallback(() => {
+      registrarEvento('vista', 'vender');
+    }, [registrarEvento]),
+  );
 
   // ---------- Validación en vivo del paso 1 ----------
   const evento = eventos.find((e) => e.id === form.eventId);
@@ -277,7 +281,7 @@ export default function Vender() {
                   Original {formatSoles(zona.precioOriginal)} · Máximo {formatSoles(tope)}
                 </AppText>
                 {precio !== undefined && !errorPrecio ? (
-                  <AppText variant="small" color={colors.success} weight="semibold">
+                  <AppText variant="small" color={colors.successText} weight="semibold">
                     Recibirás {formatSoles(precio)} cuando el comprador ingrese
                   </AppText>
                 ) : null}

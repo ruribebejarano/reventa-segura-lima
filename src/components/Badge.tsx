@@ -21,10 +21,10 @@ type IconName = ComponentProps<typeof Ionicons>['name'];
 const successSoft = '#E3F4EA';
 
 const config: Record<BadgeVariant, { bg: string; fg: string; label: string; icon?: IconName }> = {
-  agotado: { bg: colors.accentSoft, fg: colors.accent, label: 'Agotado' },
-  verificado: { bg: successSoft, fg: colors.success, label: 'Verificada', icon: 'checkmark-circle' },
+  agotado: { bg: colors.accentSoft, fg: colors.accentText, label: 'Agotado' },
+  verificado: { bg: successSoft, fg: colors.successText, label: 'Verificada', icon: 'checkmark-circle' },
   retenido: { bg: colors.warningBg, fg: colors.warningText, label: 'Pago retenido', icon: 'lock-closed' },
-  liberado: { bg: successSoft, fg: colors.success, label: 'Pago liberado', icon: 'checkmark-done' },
+  liberado: { bg: successSoft, fg: colors.successText, label: 'Pago liberado', icon: 'checkmark-done' },
   reembolsado: { bg: colors.infoBg, fg: colors.navy, label: 'Reembolsado', icon: 'arrow-undo' },
   reembolso_proceso: { bg: colors.infoBg, fg: colors.navy, label: 'Reembolso en proceso', icon: 'time-outline' },
   error: { bg: colors.accentSoft, fg: colors.danger, label: 'Error', icon: 'alert-circle' },

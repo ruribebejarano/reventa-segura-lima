@@ -33,7 +33,7 @@ export function Timeline({ hitos }: { hitos: Hito[] }) {
               <AppText
                 variant="small"
                 weight={h.estado === 'pendiente' ? 'regular' : 'semibold'}
-                color={h.estado === 'pendiente' ? colors.textSecondary : h.estado === 'actual' ? colors.primary : colors.navy}>
+                color={h.estado === 'pendiente' ? colors.textSecondary : h.estado === 'actual' ? colors.primaryText : colors.navy}>
                 {h.titulo}
               </AppText>
               {h.detalle ? (

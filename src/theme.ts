@@ -17,6 +17,13 @@ export const colors = {
   surface: '#FFFFFF',
   border: '#E3E8EF',
   white: '#FFFFFF',
+  /**
+   * Tonos oscuros SOLO para texto pequeño sobre fondos claros (contraste AA ≥ 4,5:1).
+   * Los colores de marca de arriba se mantienen para fondos, íconos y bordes.
+   */
+  primaryText: '#1D7468',
+  successText: '#237A46',
+  accentText: '#A8432A',
   /** Fondo exterior en web (alrededor del "celular"). */
   webOuter: '#E9EEF3',
 } as const;

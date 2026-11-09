@@ -1,5 +1,5 @@
-import { router } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { router, useFocusEffect } from 'expo-router';
+import { useCallback, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { AppHeader, AppText, EventCard, InfoBox, Screen, SearchBar } from '@/components';
@@ -13,9 +13,12 @@ export default function Inicio() {
   const conteo = useConteoOfertas();
   const registrarEvento = useAppStore((s) => s.registrarEvento);
 
-  useEffect(() => {
-    registrarEvento('vista', 'inicio');
-  }, [registrarEvento]);
+  // Las pestañas quedan montadas: registramos la vista cada vez que se enfocan.
+  useFocusEffect(
+    useCallback(() => {
+      registrarEvento('vista', 'inicio');
+    }, [registrarEvento]),
+  );
 
   return (
     <Screen header={<AppHeader />} scroll bottomInset={false} contentStyle={styles.content}>

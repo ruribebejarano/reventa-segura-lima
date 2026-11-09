@@ -1,5 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { Animated, Easing, Platform, StyleSheet, View } from 'react-native';
 
 import { colors, radius } from '@/theme';
@@ -8,7 +8,8 @@ const nativeDriver = Platform.OS !== 'web';
 
 /** Escudo con pulso suave mientras se consulta a la ticketera. */
 export function PulsingShield({ size = 88 }: { size?: number }) {
-  const pulso = useRef(new Animated.Value(0)).current;
+  // useState (no useRef): el valor animado se crea una vez y se puede leer durante el render.
+  const [pulso] = useState(() => new Animated.Value(0));
 
   useEffect(() => {
     const loop = Animated.loop(

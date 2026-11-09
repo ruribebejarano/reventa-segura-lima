@@ -1,5 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityIndicator, Animated, Platform, StyleSheet, View } from 'react-native';
 
 import { colors, spacing } from '@/theme';
@@ -18,7 +18,8 @@ const nativeDriver = Platform.OS !== 'web';
 
 /** Fila de comprobación: spinner gris → check verde (o X roja). Aparece con un fundido suave. */
 export function VerifyStep({ texto, estado, textoError }: VerifyStepProps) {
-  const aparicion = useRef(new Animated.Value(0)).current;
+  // useState (no useRef): el valor animado se crea una vez y se puede leer durante el render.
+  const [aparicion] = useState(() => new Animated.Value(0));
 
   useEffect(() => {
     Animated.timing(aparicion, { toValue: 1, duration: 250, useNativeDriver: nativeDriver }).start();

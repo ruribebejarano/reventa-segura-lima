@@ -63,11 +63,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     gap: spacing.sm,
   },
+  // Área táctil de 44 × 44 (también en web, donde hitSlop no amplía el área); el margen negativo
+  // mantiene la flecha alineada con el borde del contenido.
   back: {
-    width: 28,
+    width: 44,
     height: 44,
     justifyContent: 'center',
-    marginLeft: -spacing.xs,
+    marginLeft: -spacing.md,
+    paddingLeft: spacing.sm,
+    marginRight: -spacing.sm,
   },
   backIcon: {
     fontSize: 34,
@@ -75,7 +79,7 @@ const styles = StyleSheet.create({
   },
   title: {
     flex: 1,
-    fontSize: 18,
+    fontSize: 19, // ≥ 18,66 px en negrita = "texto grande" (WCAG): blanco sobre #2A9D8F cumple 3:1
     lineHeight: 24,
   },
 });

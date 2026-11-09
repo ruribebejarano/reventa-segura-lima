@@ -65,7 +65,7 @@ export default function Pago() {
       }
       registrarEvento('pago_completado', 'pago');
       // Sacamos de la pila evento → oferta → verificación → pago: desde la confirmación no se vuelve a pagar.
-      router.dismissAll();
+      if (router.canDismiss()) router.dismissAll();
       router.push({ pathname: '/confirmacion/[orderId]', params: { orderId: order.id } });
     }, PROCESANDO_MS);
   };

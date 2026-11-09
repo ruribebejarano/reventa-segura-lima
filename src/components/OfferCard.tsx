@@ -39,7 +39,7 @@ export function OfferCard({ oferta, selected = false, onPress }: OfferCardProps)
         </AppText>
         <View style={styles.linea}>
           <Ionicons name="checkmark-circle" size={16} color={colors.success} />
-          <AppText variant="small" weight="semibold" color={colors.success}>
+          <AppText variant="small" weight="semibold" color={colors.successText}>
             Verificable
           </AppText>
         </View>

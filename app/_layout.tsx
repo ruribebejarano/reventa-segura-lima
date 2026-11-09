@@ -8,12 +8,13 @@ import {
 import * as Linking from 'expo-linking';
 import { Stack, router, useGlobalSearchParams } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { PhoneFrame } from '@/components';
 import { useAppStore } from '@/store/useAppStore';
 import { useHydrated } from '@/store/useHydrated';
+import { useTituloDocumento } from '@/utils/useTituloDocumento';
 import { colors } from '@/theme';
 
 SplashScreen.preventAutoHideAsync();
@@ -36,26 +37,30 @@ function useEnlaceDePrueba(listo: boolean) {
   const { prueba } = useGlobalSearchParams<{ prueba?: string }>();
   const urlInicialConPrueba = useRef(urlTienePrueba(Linking.getLinkingURL()));
   const user = useAppStore((s) => s.user);
-  const [pendiente, setPendiente] = useState(false);
+  // Ref (no estado): solo marca que falta navegar; no necesita volver a renderizar.
+  const pendiente = useRef(false);
 
   useEffect(() => {
     if (!listo) return;
     if (urlInicialConPrueba.current || prueba === '1') {
       urlInicialConPrueba.current = false;
-      const { setModoPrueba, loginDemo } = useAppStore.getState();
+      const { resetDemo, setModoPrueba, loginDemo } = useAppStore.getState();
+      // Cada enlace de prueba es un participante nuevo: datos y resultados limpios.
+      resetDemo();
       setModoPrueba(true);
+      pendiente.current = true;
       loginDemo();
-      setPendiente(true);
     }
   }, [listo, prueba]);
 
   // Navegamos cuando la sesión ya existe; antes, la ruta protegida rechazaría la navegación.
+  // loginDemo() crea un objeto de usuario nuevo, así que este efecto siempre vuelve a correr.
   useEffect(() => {
-    if (pendiente && user) {
-      setPendiente(false);
+    if (pendiente.current && user) {
+      pendiente.current = false;
       router.replace({ pathname: '/evento/[id]', params: { id: 'e1' } });
     }
-  }, [pendiente, user]);
+  }, [user]);
 }
 
 export default function RootLayout() {
@@ -72,6 +77,7 @@ export default function RootLayout() {
   const listo = (fontsLoaded || !!fontError) && hydrated;
 
   useEnlaceDePrueba(listo);
+  useTituloDocumento();
 
   useEffect(() => {
     if (listo) SplashScreen.hideAsync();
@@ -101,7 +107,6 @@ export default function RootLayout() {
             <Stack.Screen name="reporte/[orderId]" />
             <Stack.Screen name="ayuda" />
             <Stack.Screen name="metodos-pago" />
-            <Stack.Screen name="componentes" />
           </Stack.Protected>
           <Stack.Protected guard={!conSesion}>
             <Stack.Screen name="login" />

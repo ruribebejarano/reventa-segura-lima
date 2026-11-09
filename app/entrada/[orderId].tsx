@@ -128,5 +128,5 @@ const styles = StyleSheet.create({
   content: { gap: spacing.lg },
   estado: { alignSelf: 'center' },
   garantia: { gap: spacing.lg },
-  discreto: { height: 40 },
+  discreto: { height: 44 },
 });

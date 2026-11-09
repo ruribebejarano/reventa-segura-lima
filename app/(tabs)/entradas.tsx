@@ -1,6 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { router, type Href } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { router, useFocusEffect, type Href } from 'expo-router';
+import { useCallback, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { AppHeader, AppText, Button, OrderCard, Screen, SegmentedTabs } from '@/components';
@@ -17,9 +17,12 @@ export default function MisEntradas() {
   const events = useAppStore((s) => s.events);
   const registrarEvento = useAppStore((s) => s.registrarEvento);
 
-  useEffect(() => {
-    registrarEvento('vista', 'entradas');
-  }, [registrarEvento]);
+  // Las pestañas quedan montadas: registramos la vista cada vez que se enfocan.
+  useFocusEffect(
+    useCallback(() => {
+      registrarEvento('vista', 'entradas');
+    }, [registrarEvento]),
+  );
 
   const lista = segmento === 'proximas' ? proximas : pasadas;
   const sinNinguna = proximas.length === 0 && pasadas.length === 0;

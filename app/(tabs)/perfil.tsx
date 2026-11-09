@@ -108,7 +108,7 @@ export default function Perfil() {
           </View>
           <View style={styles.flex}>
             <AppText variant="h2">{user.nombre}</AppText>
-            <AppText variant="small" color={user.dniVerificado ? colors.success : colors.textSecondary} weight="semibold">
+            <AppText variant="small" color={user.dniVerificado ? colors.successText : colors.textSecondary} weight="semibold">
               DNI {user.dniMasked}
               {user.dniVerificado ? ' · Verificado ✓' : ''}
             </AppText>
@@ -134,6 +134,8 @@ export default function Perfil() {
             <ListRow
               label="Modo prueba con usuarios"
               icon="flask-outline"
+              // Toda la fila activa el interruptor: área táctil cómoda también en web.
+              onPress={() => setModoPrueba(!modoPrueba)}
               right={
                 <Switch
                   value={modoPrueba}
@@ -192,7 +194,7 @@ export default function Perfil() {
 
       {/* Aviso flotante: visible aunque la lista esté desplazada. */}
       {aviso ? (
-        <View style={styles.aviso} accessibilityLiveRegion="polite" pointerEvents="none">
+        <View style={styles.aviso} accessibilityLiveRegion="polite">
           <AppText variant="small" weight="semibold" color={colors.white} align="center">
             {aviso}
           </AppText>
@@ -236,6 +238,7 @@ const styles = StyleSheet.create({
   valor: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs },
   separador: { height: 1, backgroundColor: colors.border, marginVertical: spacing.xs },
   aviso: {
+    pointerEvents: 'none',
     position: 'absolute',
     bottom: spacing.lg,
     alignSelf: 'center',

@@ -20,7 +20,7 @@ export function Chip({ label, selected = false, onPress }: ChipProps) {
         selected ? styles.selected : styles.idle,
         pressed && !selected && { backgroundColor: colors.primarySoft },
       ]}>
-      <AppText variant="small" weight="semibold" color={selected ? colors.white : colors.navy}>
+      <AppText variant="small" weight="semibold" color={selected ? colors.primaryText : colors.navy}>
         {label}
       </AppText>
     </Pressable>
@@ -29,7 +29,7 @@ export function Chip({ label, selected = false, onPress }: ChipProps) {
 
 const styles = StyleSheet.create({
   chip: {
-    height: 36,
+    minHeight: 44,
     paddingHorizontal: spacing.lg,
     borderRadius: radius.pill,
     borderWidth: 1,
@@ -37,5 +37,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   idle: { backgroundColor: colors.surface, borderColor: colors.border },
-  selected: { backgroundColor: colors.primary, borderColor: colors.primary },
+  selected: { backgroundColor: colors.primarySoft, borderColor: colors.primary, borderWidth: 1.5 },
 });

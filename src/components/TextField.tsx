@@ -45,7 +45,7 @@ export function TextField({ label, error, hint, password = false, onFocus, onBlu
         {password ? (
           <Pressable
             onPress={() => setVisible((v) => !v)}
-            hitSlop={8}
+            hitSlop={12}
             accessibilityRole="button"
             accessibilityLabel={visible ? 'Ocultar contraseña' : 'Mostrar contraseña'}
             style={styles.eye}>

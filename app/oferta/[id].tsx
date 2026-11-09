@@ -76,7 +76,7 @@ export default function DetalleOferta() {
               size={18}
               color={dentroDelTope ? colors.success : colors.danger}
             />
-            <AppText variant="small" weight="semibold" color={dentroDelTope ? colors.success : colors.danger}>
+            <AppText variant="small" weight="semibold" color={dentroDelTope ? colors.successText : colors.danger}>
               Original {formatSoles(oferta.precioOriginal)} · {dentroDelTope ? 'dentro del tope' : 'supera el tope'}
             </AppText>
           </View>
@@ -86,7 +86,7 @@ export default function DetalleOferta() {
       {/* Vendedor */}
       <Card style={styles.vendedor}>
         <View style={styles.avatar}>
-          <AppText variant="h2" color={colors.primary}>
+          <AppText variant="h2" color={colors.primaryText}>
             {vendedor.nombre.charAt(0).toUpperCase()}
           </AppText>
         </View>
@@ -94,7 +94,7 @@ export default function DetalleOferta() {
           <AppText weight="semibold">{vendedor.nombre}</AppText>
           {vendedor.dniVerificado ? (
             <View style={styles.fila}>
-              <AppText variant="small" weight="semibold" color={colors.success}>
+              <AppText variant="small" weight="semibold" color={colors.successText}>
                 DNI verificado
               </AppText>
               <Ionicons name="checkmark-circle" size={16} color={colors.success} />

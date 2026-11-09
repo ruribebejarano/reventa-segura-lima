@@ -1,5 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { Animated, Platform, StyleSheet, View } from 'react-native';
 
 import { colors, radius } from '@/theme';
@@ -14,7 +14,8 @@ const nativeDriver = Platform.OS !== 'web';
 
 /** Círculo de resultado que entra con un pequeño rebote. */
 export function ResultIcon({ ok, size = 88 }: ResultIconProps) {
-  const entrada = useRef(new Animated.Value(0)).current;
+  // useState (no useRef): el valor animado se crea una vez y se puede leer durante el render.
+  const [entrada] = useState(() => new Animated.Value(0));
 
   useEffect(() => {
     Animated.spring(entrada, { toValue: 1, friction: 6, tension: 80, useNativeDriver: nativeDriver }).start();
