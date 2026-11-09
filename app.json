@@ -14,7 +14,6 @@
     },
     "android": {
       "package": "pe.reventaverificada.app",
-      "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#2A9D8F",
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -50,6 +49,17 @@
       "typedRoutes": true,
       "reactCompiler": true
     },
-    "primaryColor": "#2A9D8F"
+    "primaryColor": "#2A9D8F",
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "7817e978-3ece-4674-8999-6a14d5dd21e3"
+      }
+    },
+    "owner": "ricardoub"
   }
 }
