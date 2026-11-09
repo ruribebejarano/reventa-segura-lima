@@ -57,6 +57,56 @@ const og = `
   <text x="80" y="590" font-family="${FUENTE}" font-size="22" fill="${NAVY}" fill-opacity="0.75">Conciertos en Lima</text>
 </svg>`;
 
+/**
+ * Entrada estilizada (ticket con muescas y perforación) con un check blanco.
+ * Se dibuja en un lienzo de 1024 y se escala con `escala` alrededor del centro.
+ */
+const ticket = ({ escala = 1, relleno = '#ffffff', opacidadRelleno = 0.18, trazo = '#ffffff', check = '#ffffff' } = {}) => `
+  <defs>
+    <mask id="muescas">
+      <rect width="1024" height="1024" fill="#fff"/>
+      <circle cx="172" cy="512" r="64" fill="#000"/>
+      <circle cx="852" cy="512" r="64" fill="#000"/>
+    </mask>
+  </defs>
+  <g transform="translate(512 512) scale(${escala}) rotate(-8) translate(-512 -512)">
+    <g mask="url(#muescas)">
+      <rect x="172" y="282" width="680" height="460" rx="64" fill="${relleno}" fill-opacity="${opacidadRelleno}"
+            stroke="${trazo}" stroke-width="26"/>
+    </g>
+    <line x1="672" y1="330" x2="672" y2="694" stroke="${trazo}" stroke-width="16" stroke-linecap="round" stroke-dasharray="2 44"/>
+    <path d="M300 520 L392 610 L560 428" fill="none" stroke="${check}" stroke-width="58" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>`;
+
+/** Ícono de la app (iOS, Expo y tiendas): fondo verde azulado de borde a borde. */
+const iconoApp = `
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" fill="${PRIMARIO}"/>
+  ${ticket({ escala: 0.95 })}
+</svg>`;
+
+/** Primer plano del ícono adaptable: transparente y dentro de la zona segura (66 % central). */
+const iconoAdaptable = `
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  ${ticket({ escala: 0.62 })}
+</svg>`;
+
+/** Ícono monocromo (Android 13+ lo tiñe con el tema): solo formas blancas sólidas. */
+const iconoMonocromo = `
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  ${ticket({ escala: 0.62, opacidadRelleno: 0 })}
+</svg>`;
+
+/** Splash: check en recuadro + "Reventa Verificada", blanco sobre transparente (el fondo lo pone el plugin). */
+const splash = `
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300">
+  <g transform="translate(40 70)">
+    <rect width="160" height="160" rx="40" fill="#ffffff"/>
+    <path d="M42 84 L70 112 L120 54" fill="none" stroke="${PRIMARIO}" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="236" y="190" font-family="${FUENTE}" font-size="104" font-weight="700" fill="#ffffff">Reventa Verificada</text>
+</svg>`;
+
 async function png(svg, destino, ancho, alto = ancho) {
   const archivo = path.join(raiz, destino);
   await mkdir(path.dirname(archivo), { recursive: true });
@@ -69,3 +119,9 @@ await png(icono(48, 22), 'assets/images/favicon.png', 48);
 // iOS recorta las esquinas solo: cuadrado sin redondeo.
 await png(icono(180, 0), 'public/apple-touch-icon.png', 180);
 await png(og, 'public/og.png', 1200, 630);
+
+// App nativa (Android / iOS)
+await png(iconoApp, 'assets/icon.png', 1024);
+await png(iconoAdaptable, 'assets/adaptive-icon.png', 1024);
+await png(iconoMonocromo, 'assets/adaptive-icon-monochrome.png', 1024);
+await png(splash, 'assets/splash.png', 1200, 300);
